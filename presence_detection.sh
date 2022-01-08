@@ -58,6 +58,28 @@ do
 
    
     		fi
+		
+		
+	elif `echo $input | grep -q deauthenticated`
+
+  		then
+
+    		mac=`echo $input | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
+
+    		if `echo $mac | grep -q $macdevice1`
+
+      			then
+
+        		curl -X POST --header "Content-Type: text/plain" --header "Accept: application/json" -d "OFF" "http://$IPAddr:$port/rest/items/$item1"
+
+		elif `echo $mac | grep -q $macdevice2`
+
+		then
+			curl -X POST --header "Content-Type: text/plain" --header "Accept: application/json" -d "OFF" "http://$IPAddr:$port/rest/items/$item2"
+
+
+    		fi
+		
    
 	elif `echo $input | grep -q authenticated`
    
